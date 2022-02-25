@@ -1,12 +1,9 @@
 /** @format */
 
 import React from "react";
-// import "../hero/hero.scss";
-
-import "./videoInfo.scss";
 
 export default function VideoInfo({ details }) {
-  return [
+  return (
     <div>
       <h1 className="video__title">{details.title}</h1>
       <div className="video__details">
@@ -22,7 +19,6 @@ export default function VideoInfo({ details }) {
       <div className="main">
         <p className="main__text">{details.description}</p>
       </div>
-    </div>,
-  ];
+    </div>
+  );
 }
-// export default VideoInfo;

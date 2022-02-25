@@ -3,15 +3,12 @@
 import "../src/App.scss";
 import React from "react";
 import Header from "./components/header/Header.jsx";
-// import Hero from "./components/hero/Hero";
-import Main from "./components/main/Main";
-import CommentsInput from "./components/comments-input/CommentsInput";
-import CommentsDisplay from "./components/comments-display/CommentsDisplay";
 import videosDetails from "./assets/Data/video-details.json";
 import videosInfo from "./assets/Data/videos.json";
-import Hero from "./components/hero/Hero";
 import VideoInfo from "./components/video-info/VideoInfo";
-import Aside from "./components/aside/Aside";
+import AsideVideo from "./components/aside/AsideVideo";
+import VideoPlayer from "./components/videoPlayer/VideoPlayer";
+import CommmentsRender from "./components/commentsRender/CommentsRender";
 
 export default class App extends React.Component {
   state = {
@@ -38,11 +35,13 @@ export default class App extends React.Component {
     return (
       <>
         <Header />
-        <Main videos={this.state.videos} handleChange={this.handleChange} />
-        <Hero details={this.state.details[0]} />
+        <VideoPlayer details={this.state.details[0]} />
         <VideoInfo details={this.state.details[0]} />
-        <CommentsInput />
-        <CommentsDisplay details={this.state.details[0]} />
+        <CommmentsRender details={this.state.details[0]} />
+        <AsideVideo
+          videos={this.state.videos}
+          handleChange={this.handleChange}
+        />
       </>
     );
   }
