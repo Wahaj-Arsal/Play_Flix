@@ -1,0 +1,24 @@
+/** @format */
+
+@use "../../styles/partials/variables" as *;
+
+.aside {
+  &__details {
+  }
+  &__title {
+    color: red;
+  }
+  &__channel {
+  }
+}
+
+.aside-img {
+  // width: 200px;
+  // height: 100px;
+
+  &__img {
+    background-color: $clr-secondary-light;
+    width: 200px;
+    height: 100px;
+  }
+}

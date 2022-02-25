@@ -1,0 +1,29 @@
+/** @format */
+
+// @use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/breakpoints" as *;
+
+.hero {
+}
+
+.hero__title {
+  color: red;
+}
+.video__container {
+  // padding: 0 24px;
+  background-color: $clr-secondary-dark;
+  // background-position: center;
+  // background-size: cover;
+  // width: 100%;
+  // height: auto;
+  // margin: auto 0;
+}
+.hero__video {
+  width: 100%;
+  // width: 200px;
+  // height: 100px;
+  @include tablet {
+    // padding: 0 12px; //24px;
+  }
+}

@@ -1,29 +1,45 @@
 /** @format */
 
-@use "../styles/partials/mixins" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/breakpoints" as *;
+@use "../../styles/partials/variables" as *;
 
 .navbar {
   //   width: 100%;
   padding: 0 1rem;
+  @include tablet {
+    padding: 0 24px;
+  }
   &__content {
     @include flex(column, center, center);
     // flex-wrap: wrap;
+    @include tablet {
+      @include flex(row, center, center);
+    }
   }
 
   &__logo {
     width: 7.5rem; //120px
     height: 1.563rem; //25px
     margin: 1rem 0 0 0;
+    @include tablet {
+      margin: 0;
+    }
   }
   &__items {
     @include flex(row, space-between, center);
     flex-wrap: wrap;
     width: 100%;
+    @include tablet {
+      @include flex(row, flex-end, center);
+      flex-wrap: nowrap;
+      // padding: 0 0 0 1rem;
+    }
   }
   &__search {
     // background: url("../assets/Icons/search.svg") no-repeat scroll 0 0
     // transparent;
-    background-image: url("../assets/Icons/search.svg");
+    background-image: url("../../assets/Icons/search.svg");
     // display: block;
     // float: right;
     // text-align: center;
@@ -36,10 +52,17 @@
     width: 82%;
     height: 2.25rem; //36px
     margin: 1rem 0;
+    border-radius: 4px;
+    // border: 0;
+    border: 2px solid $clr-secondary-light;
+    @include tablet {
+      width: 40%;
+      order: 1;
+    }
   }
 
   &__icon {
-    background-image: url("../assets/Images/Mohan-muruge.jpg");
+    background-image: url("../../assets/Images/Mohan-muruge.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -47,15 +70,9 @@
     height: 2.25rem; //36px
     width: 2.25rem; //36px
     border-radius: 50%;
-  }
-
-  &__button {
-    width: 100%;
-    height: 3rem;
-
-    &-img {
-    }
-    &-text {
+    @include tablet {
+      order: 3;
+      margin: 0 0 0 1rem;
     }
   }
 }
