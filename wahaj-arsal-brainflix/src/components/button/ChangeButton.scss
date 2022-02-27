@@ -4,6 +4,8 @@
 @use "../../styles/partials/breakpoints" as *;
 @use "../../styles/partials/variables" as *;
 
+//Button Component
+
 .button {
   @include m-labels-buttons;
   padding: 0 2rem; //0 32px;
