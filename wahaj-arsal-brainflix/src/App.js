@@ -9,7 +9,7 @@ import videosInfo from "./assets/Data/videos.json";
 import VideoDetail from "./components/videoDetail/VideoDetail";
 // import AsideVideo from "./components/sideVideos/SideVideo";
 import VideoPlayer from "./components/videoPlayer/VideoPlayer";
-// import CommmentsRender from "./components/commentsRender/CommentsRender";
+import CommmentsRender from "./components/commentsRender/CommentsRender";
 
 export default class App extends React.Component {
   state = {
@@ -51,10 +51,10 @@ export default class App extends React.Component {
               details={this.state.details[0]}
               newMoment={this.newMoment}
             />
-            {/* <CommmentsRender
+            <CommmentsRender
               details={this.state.details[0]}
               newMoment={this.newMoment}
-            /> */}
+            />
           </section>
           <section className="desktop__right">
             {/* <AsideVideo
