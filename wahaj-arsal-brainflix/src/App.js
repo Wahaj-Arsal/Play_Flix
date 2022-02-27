@@ -6,7 +6,7 @@ import moment from "moment";
 import Header from "./components/header/Header.jsx";
 import videosDetails from "./assets/Data/video-details.json";
 import videosInfo from "./assets/Data/videos.json";
-// import VideoDetail from "./components/videoDetail/VideoDetail";
+import VideoDetail from "./components/videoDetail/VideoDetail";
 // import AsideVideo from "./components/sideVideos/SideVideo";
 import VideoPlayer from "./components/videoPlayer/VideoPlayer";
 // import CommmentsRender from "./components/commentsRender/CommentsRender";
@@ -45,24 +45,24 @@ export default class App extends React.Component {
         <Header />
 
         <VideoPlayer details={this.state.details[0]} />
-        {/* <section className="desktop">
+        <section className="desktop">
           <section className="desktop__left">
             <VideoDetail
               details={this.state.details[0]}
               newMoment={this.newMoment}
             />
-            <CommmentsRender
+            {/* <CommmentsRender
               details={this.state.details[0]}
               newMoment={this.newMoment}
-            />
+            /> */}
           </section>
           <section className="desktop__right">
-            <AsideVideo
+            {/* <AsideVideo
               videos={this.state.videos}
               handleChange={this.handleChange}
-            />
+            /> */}
           </section>
-        </section> */}
+        </section>
       </>
     );
   }
