@@ -12,6 +12,7 @@ const Video = ({ video, onClick }) => {
           className="aside__img"
           onClick={onClick}
           id={video.id}
+          alt={video.title}
         />
       </div>
       <div className="aside-details">
