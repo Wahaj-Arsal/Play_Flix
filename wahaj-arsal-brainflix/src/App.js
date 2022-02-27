@@ -7,7 +7,7 @@ import Header from "./components/header/Header.jsx";
 import videosDetails from "./assets/Data/video-details.json";
 import videosInfo from "./assets/Data/videos.json";
 import VideoDetail from "./components/videoDetail/VideoDetail";
-// import AsideVideo from "./components/sideVideos/SideVideo";
+import AsideVideo from "./components/sideVideos/SideVideo";
 import VideoPlayer from "./components/videoPlayer/VideoPlayer";
 import CommmentsRender from "./components/commentsRender/CommentsRender";
 
@@ -57,10 +57,10 @@ export default class App extends React.Component {
             />
           </section>
           <section className="desktop__right">
-            {/* <AsideVideo
+            <AsideVideo
               videos={this.state.videos}
               handleChange={this.handleChange}
-            /> */}
+            />
           </section>
         </section>
       </>
