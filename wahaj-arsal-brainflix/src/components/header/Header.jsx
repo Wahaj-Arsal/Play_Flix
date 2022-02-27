@@ -1,6 +1,6 @@
 /** @format */
 
-import "./header.scss";
+import "./Header.scss";
 import logo from "../../assets/Logo/BrainFlix-logo.svg";
 import Button from "../button/Button";
 
@@ -17,7 +17,7 @@ const Header = () => {
               placeholder="Search"
             />
             <div className="navbar__icon"></div>
-            <Button className="nav-button" />
+            <Button className="navbar__button button" label="upload" />
           </div>
         </div>
       </nav>

@@ -3,9 +3,9 @@
 // import "./header.scss";
 // import logo from "../../assets/Logo/BrainFlix-logo.svg";
 
-import "../../components/button/button.scss";
+import "./Button.scss";
 
-const Button = ({ className }) => {
-  return <button className={className}>upload</button>;
+const Button = ({ className, label }) => {
+  return <button className={className}>{label}</button>;
 };
 export default Button;
