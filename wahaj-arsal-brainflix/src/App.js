@@ -43,7 +43,6 @@ export default class App extends React.Component {
     return (
       <>
         <Header />
-
         <VideoPlayer details={this.state.details[0]} />
         <section className="desktop">
           <section className="desktop__left">
