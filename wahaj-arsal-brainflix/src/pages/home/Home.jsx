@@ -59,18 +59,18 @@ export default class Home extends Component {
 
   //******** Validation When The Delete Button Is Pressed ******** */
   //Checks to see if the button ir the img inside the button is pressed to get the comment tile ID
-  // selectComment = (e) => {
-  //   if (e.target.classList.contains("comment__img")) {
-  //     let button =
-  //       e.target.parentElement.parentElement.parentElement.parentElement
-  //         .parentElement.id;
-  //     return button;
-  //   } else if (e.target.classList.contains("comment__button")) {
-  //     let button =
-  //       e.target.parentElement.parentElement.parentElement.parentElement.id;
-  //     return button;
-  //   }
-  // };
+  selectComment = (e) => {
+    if (e.target.classList.contains("comment__img")) {
+      let button =
+        e.target.parentElement.parentElement.parentElement.parentElement
+          .parentElement.id;
+      return button;
+    } else if (e.target.classList.contains("comment__button")) {
+      let button =
+        e.target.parentElement.parentElement.parentElement.parentElement.id;
+      return button;
+    }
+  };
 
   //******** API Call When The Delete Button Is Pressed ******** */
   //Takes the ID from the selectComment function and deletes the comment on a video
