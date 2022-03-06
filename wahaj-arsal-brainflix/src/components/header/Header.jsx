@@ -3,13 +3,16 @@
 import "./Header.scss";
 import logo from "../../assets/Logo/BrainFlix-logo.svg";
 import Button from "../button/Button";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header>
+    <header className="header__container">
       <nav className="navbar">
         <div className="navbar__content">
-          <img className="navbar__logo" src={logo} alt="brainflix logo" />
+          <Link to="/" className="navbar__brand">
+            <img className="navbar__logo" src={logo} alt="brainflix logo" />
+          </Link>
           <div className="navbar__items">
             <input
               type="text"
@@ -17,7 +20,9 @@ const Header = () => {
               placeholder="Search"
             />
             <div className="navbar__icon"></div>
-            <Button className="navbar__button button" label="upload" />
+            <Link to="/upload" className="navbar__link">
+              <Button className="navbar__button button" label="upload" />
+            </Link>
           </div>
         </div>
       </nav>

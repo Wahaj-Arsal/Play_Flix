@@ -97,4 +97,13 @@
       @include d-t-body-copy;
     }
   }
+  &__icons {
+    padding: 0.5rem 0 0 0;
+    text-align: right;
+  }
+  &__button {
+    outline: none;
+    border: none;
+    background-color: $fnt-clr-primary-neutral;
+  }
 }

@@ -45,10 +45,10 @@
     @include flex(column, space-between, flex-start);
     @include tablet {
       @include flex(row, space-between, flex-start);
-      width: 30%;
+      width: 32%;
     }
     @include desktop {
-      width: 35%;
+      width: 40%;
     }
   }
 

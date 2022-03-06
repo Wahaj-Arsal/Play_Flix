@@ -13,7 +13,7 @@
     padding: 1.5rem 2.25rem;
   }
   @include desktop {
-    padding: 1.5rem 1.5rem 0 0;
+    padding: 1.5rem 1.5rem 1.5rem 0;
   }
 
   &__picture {
@@ -73,6 +73,7 @@
       @include d-t-body-copy;
       max-height: 2.5rem; //40px
       padding: 0.45rem 1rem;
+      margin: 0 1rem 0 0;
     }
 
     &:focus {
@@ -81,7 +82,7 @@
     }
 
     &--error {
-      border: 1px solid #d22d2d;
+      border: 2px solid #d22d2d;
     }
 
     &::placeholder {

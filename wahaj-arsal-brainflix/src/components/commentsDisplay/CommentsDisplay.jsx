@@ -1,13 +1,12 @@
 /** @format */
 
 import "./CommentsDisplay.scss";
+import deleteIcon from "../../assets/Icons/icon-delete.svg";
 
-const CommentsDisplay = ({ comment, newMoment }) => {
-  // const commentMarkup = comments.comments.map((comment) => {
+const CommentsDisplay = ({ comment, newMoment, deleteComment }) => {
   return (
-    <div className="comment__container">
+    <div className="comment__container" id={comment.id}>
       <div className="comment__tile">
-        <p></p>
         <div className="comment__picture"></div>
         <div className="comment__content">
           <div className="comment__header">
@@ -15,6 +14,11 @@ const CommentsDisplay = ({ comment, newMoment }) => {
             <p className="comment__date">{newMoment(comment.timestamp)}</p>
           </div>
           <p className="comment__text">{comment.comment}</p>
+          <div className="comment__icons">
+            <button className="comment__button" onClick={deleteComment}>
+              <img className="comment__img" src={deleteIcon} />
+            </button>
+          </div>
         </div>
       </div>
     </div>
