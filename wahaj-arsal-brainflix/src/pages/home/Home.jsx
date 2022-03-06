@@ -84,26 +84,26 @@ export default class Home extends Component {
 
   //******** API Call To Post A Comment ******** */
   //Posts A Comment To The Video
-  // postComment = async (event) => {
-  //   const newComment = {
-  //     name: "Wahaj",
-  //     comment: event,
-  //   };
-  //   await axios
-  //     .post(API_URL_ID_Comment(this.state.videoID), newComment)
-  //     .then((response) => {
-  //       this.getNewComment();
-  //     });
-  // };
+  postComment = async (event) => {
+    const newComment = {
+      name: "Wahaj",
+      comment: event,
+    };
+    await axios
+      .post(API_URL_ID_Comment(this.state.videoID), newComment)
+      .then((response) => {
+        this.getNewComment();
+      });
+  };
 
   //******** API Call To Only Respond With New Comment ******** */
   //This function re-renders the comments section, including the new comment
-  // getNewComment = async () => {
-  //   const response = await axios.get(API_URL_ID(this.state.videoID));
-  //   this.setState({
-  //     details: response.data,
-  //   });
-  // };
+  getNewComment = async () => {
+    const response = await axios.get(API_URL_ID(this.state.videoID));
+    this.setState({
+      details: response.data,
+    });
+  };
 
   //******** API Call When The Page Is Refreshed ******** */
   //This function is called when componentDidMount
