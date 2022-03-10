@@ -2,6 +2,7 @@
 
 import "./Video.scss";
 import { Link } from "react-router-dom";
+import newPicture from "../../assets/Images/Upload-video-preview.jpg";
 
 const Video = ({ video }) => {
   // console.log(video);

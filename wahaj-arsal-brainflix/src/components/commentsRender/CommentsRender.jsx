@@ -16,8 +16,8 @@ export default function CommentsRender({
     detailsComment.map((comment) => {
       return (
         <CommentsDisplay
-          key={comment.id}
-          id={comment.id}
+          key={comment.timestamp}
+          id={comment.timestamp}
           comment={comment}
           deleteComment={deleteComment}
           newMoment={newMoment}

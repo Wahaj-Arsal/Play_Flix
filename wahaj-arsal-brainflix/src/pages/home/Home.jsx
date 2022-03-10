@@ -9,18 +9,21 @@ import axios from "axios";
 import moment from "moment";
 import CommentInput from "../../components/commentsInput/CommentInput";
 import { toast } from "react-toastify";
+import { uniqueNamesGenerator, starWars } from "unique-names-generator";
 
-const API_URL = `https://project-2-api.herokuapp.com/videos/`;
-const API_KEY = `?api_key=5b8e876e-df7c-4475-8dff-3cd2ed0b1aab`;
+// const API_URL = `https://project-2-api.herokuapp.com/videos/`;
+// const API_KEY = `?api_key=5b8e876e-df7c-4475-8dff-3cd2ed0b1aab`;
 
-const API_URL_ID = (id) =>
-  `https://project-2-api.herokuapp.com/videos/${id}?api_key=5b8e876e-df7c-4475-8dff-3cd2ed0b1aab`;
+const API_URL = `http://localhost:8080/`;
+const API_URL_ID = (id) => `http://localhost:8080/videos/${id}`;
+const API_URL_ID_COMMENTS = (id) =>
+  `http://localhost:8080/videos/${id}/comments`;
 
-const API_URL_ID_Comment = (id) =>
-  `https://project-2-api.herokuapp.com/videos/${id}/comments?api_key=5b8e876e-df7c-4475-8dff-3cd2ed0b1aab`;
+// const API_URL_ID_Comment = (id) =>
+//   `https://project-2-api.herokuapp.com/videos/${id}/comments?api_key=5b8e876e-df7c-4475-8dff-3cd2ed0b1aab`;
 
-const API_URL_ID_Comment_Delete = (videoID, commentID) =>
-  `https://project-2-api.herokuapp.com/videos/${videoID}/comments/${commentID}?api_key=5b8e876e-df7c-4475-8dff-3cd2ed0b1aab`;
+// const API_URL_ID_Comment_Delete = (videoID, commentID) =>
+//   `https://project-2-api.herokuapp.com/videos/${videoID}/comments/${commentID}?api_key=5b8e876e-df7c-4475-8dff-3cd2ed0b1aab`;
 
 let newId = "";
 
@@ -53,7 +56,7 @@ export default class Home extends Component {
   //******** Loads When Logo Is Pressed ******** */
   //Calls the whole list of vidoes and deletes the first one
   getDefaultVideo = async () => {
-    const videoResponse = await axios.get(API_URL + API_KEY);
+    const videoResponse = await axios.get(API_URL);
     this.getNewData(videoResponse.data[0].id);
   };
 
@@ -74,41 +77,55 @@ export default class Home extends Component {
 
   //******** API Call When The Delete Button Is Pressed ******** */
   //Takes the ID from the selectComment function and deletes the comment on a video
-  deleteComment = async (e) => {
-    e.preventDefault();
-    let buttonID = this.selectComment(e);
-    await axios.delete(API_URL_ID_Comment_Delete(this.state.videoID, buttonID));
-    toast.success("Comment Deleted");
-    this.getNewComment();
-  };
+  // deleteComment = async (e) => {
+  //   e.preventDefault();
+  //   let buttonID = this.selectComment(e);
+  //   await axios.delete(API_URL_ID_Comment_Delete(this.state.videoID, buttonID));
+  //   toast.success("Comment Deleted");
+  //   this.getNewComment();
+  // };
 
   //******** API Call To Post A Comment ******** */
   //Posts A Comment To The Video
   postComment = async (event) => {
     const newComment = {
-      name: "Wahaj",
+      name: uniqueNamesGenerator({
+        dictionaries: [starWars],
+      }),
       comment: event,
     };
-    await axios
-      .post(API_URL_ID_Comment(this.state.videoID), newComment)
-      .then((response) => {
-        this.getNewComment();
-      });
+
+    const response = await axios.post(
+      API_URL_ID_COMMENTS(this.state.videoID),
+      newComment
+    );
+    console.log(response);
+
+    // .post(API_URL_ID_COMMENTS(this.state.videoID), newComment)
+    //   .then((response) => {
+    //     console.log(response);
+    //     if (response.status === 200) {
+    //       this.getNewComment();
+    //     }
+    //   });
   };
 
   //******** API Call To Only Respond With New Comment ******** */
   //This function re-renders the comments section, including the new comment
   getNewComment = async () => {
     const response = await axios.get(API_URL_ID(this.state.videoID));
+    console.log(response.data);
     this.setState({
       details: response.data,
     });
+    console.log(this.state.details);
   };
 
   //******** API Call When The Page Is Refreshed ******** */
   //This function is called when componentDidMount
   getData = async () => {
-    const videoResponse = await axios.get(API_URL + API_KEY);
+    const videoResponse = await axios.get(API_URL);
+    console.log(videoResponse);
     const detailsResponse = await axios.get(
       API_URL_ID(videoResponse.data[0].id)
     );
@@ -122,7 +139,7 @@ export default class Home extends Component {
   //******** API Call When An Aside Video Is Clicked Upon ******** */
   //This function gets the details of the new aside video which the user selects.
   getNewData = async (newId) => {
-    const videoResponse = await axios.get(API_URL + API_KEY);
+    const videoResponse = await axios.get(API_URL);
     const response = await axios.get(API_URL_ID(newId));
     this.setState({
       details: response.data,
@@ -130,6 +147,22 @@ export default class Home extends Component {
       videoID: newId,
     });
   };
+
+  //******** API Call To Upload A Video ******** */
+  //Posts A Comment To The Video
+  // uploadVideo = async (event) => {
+  //   const newVideo = {
+  //     name: uniqueNamesGenerator({
+  //       dictionaries: [starWars],
+  //     }),
+  //     comment: event,
+  //   };
+  //   await axios
+  //     .post(API_URL_ID_Comment(this.state.videoID), newVideo)
+  //     .then((response) => {
+  //       this.getNewComment();
+  //     });
+  // };
 
   //******** WORKING API AND MOUNTING END ******** */
 
