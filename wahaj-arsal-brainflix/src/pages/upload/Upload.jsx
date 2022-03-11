@@ -6,6 +6,10 @@ import "react-toastify/dist/ReactToastify.css";
 import thumbnail from "../../assets/Images/Upload-video-preview.jpg";
 import React, { Component } from "react";
 import { toast } from "react-toastify";
+import axios from "axios";
+
+import { uniqueNamesGenerator, starWars } from "unique-names-generator";
+const API_URL_UPLOAD = `http://localhost:8080/upload`;
 
 export default class Upload extends Component {
   constructor(props) {
@@ -18,6 +22,19 @@ export default class Upload extends Component {
       inputDescriptionValid: true,
     };
   }
+
+  //******** API Call To Upload A Video ******** */
+  //Posts A Comment To The Video
+  uploadVideo = async (event) => {
+    const newVideo = {
+      title: this.state.title,
+      description: this.state.description,
+      image: { thumbnail },
+    };
+    await axios.post(API_URL_UPLOAD, newVideo).then((response) => {
+      // this.getNewComment();
+    });
+  };
 
   handleChange = (e) => {
     this.setState({
@@ -44,6 +61,7 @@ export default class Upload extends Component {
     } else {
       this.setState({ inputTitleValid: true, inputDescriptionValid: true });
       toast.success("Uploading...");
+      this.uploadVideo();
       e.target.title.value = null;
       e.target.description.value = null;
       this.delayTimerRedirect();

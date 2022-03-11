@@ -16,8 +16,11 @@ import { uniqueNamesGenerator, starWars } from "unique-names-generator";
 
 const API_URL = `http://localhost:8080/`;
 const API_URL_ID = (id) => `http://localhost:8080/videos/${id}`;
+const API_URL_UPLOAD = `http://localhost:8080/`;
 const API_URL_ID_COMMENTS = (id) =>
   `http://localhost:8080/videos/${id}/comments`;
+const API_URL_ID_Comment_Delete = (videoID, commentID) =>
+  `http://localhost:8080/videos/${videoID}/comments/${commentID}`;
 
 // const API_URL_ID_Comment = (id) =>
 //   `https://project-2-api.herokuapp.com/videos/${id}/comments?api_key=5b8e876e-df7c-4475-8dff-3cd2ed0b1aab`;
@@ -77,13 +80,13 @@ export default class Home extends Component {
 
   //******** API Call When The Delete Button Is Pressed ******** */
   //Takes the ID from the selectComment function and deletes the comment on a video
-  // deleteComment = async (e) => {
-  //   e.preventDefault();
-  //   let buttonID = this.selectComment(e);
-  //   await axios.delete(API_URL_ID_Comment_Delete(this.state.videoID, buttonID));
-  //   toast.success("Comment Deleted");
-  //   this.getNewComment();
-  // };
+  deleteComment = async (e) => {
+    e.preventDefault();
+    let buttonID = this.selectComment(e);
+    await axios.delete(API_URL_ID_Comment_Delete(this.state.videoID, buttonID));
+    toast.success("Comment Deleted");
+    this.getNewComment();
+  };
 
   //******** API Call To Post A Comment ******** */
   //Posts A Comment To The Video
@@ -125,7 +128,7 @@ export default class Home extends Component {
   //This function is called when componentDidMount
   getData = async () => {
     const videoResponse = await axios.get(API_URL);
-    console.log(videoResponse);
+    // console.log(videoResponse);
     const detailsResponse = await axios.get(
       API_URL_ID(videoResponse.data[0].id)
     );
@@ -147,22 +150,6 @@ export default class Home extends Component {
       videoID: newId,
     });
   };
-
-  //******** API Call To Upload A Video ******** */
-  //Posts A Comment To The Video
-  // uploadVideo = async (event) => {
-  //   const newVideo = {
-  //     name: uniqueNamesGenerator({
-  //       dictionaries: [starWars],
-  //     }),
-  //     comment: event,
-  //   };
-  //   await axios
-  //     .post(API_URL_ID_Comment(this.state.videoID), newVideo)
-  //     .then((response) => {
-  //       this.getNewComment();
-  //     });
-  // };
 
   //******** WORKING API AND MOUNTING END ******** */
 

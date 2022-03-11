@@ -13,7 +13,7 @@ export default function AsideVideo({ videos, currentVideo }) {
   // console.log(filteredVideos);
 
   const asideMarkup = filteredVideos.map((video) => {
-    console.log(video.image);
+    // console.log(video.image);
     return (
       // <Link to={`/video/${video.id}`} key={video.id} className="side__videos">
       <Videos video={video} key={video.id} />
