@@ -8,7 +8,6 @@ import React, { Component } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-import { uniqueNamesGenerator, starWars } from "unique-names-generator";
 const API_URL_UPLOAD = `http://localhost:8080/upload`;
 
 export default class Upload extends Component {

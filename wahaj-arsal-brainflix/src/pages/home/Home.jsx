@@ -16,7 +16,6 @@ import { uniqueNamesGenerator, starWars } from "unique-names-generator";
 
 const API_URL = `http://localhost:8080/`;
 const API_URL_ID = (id) => `http://localhost:8080/videos/${id}`;
-const API_URL_UPLOAD = `http://localhost:8080/`;
 const API_URL_ID_COMMENTS = (id) =>
   `http://localhost:8080/videos/${id}/comments`;
 const API_URL_ID_Comment_Delete = (videoID, commentID) =>
@@ -29,6 +28,7 @@ const API_URL_ID_Comment_Delete = (videoID, commentID) =>
 //   `https://project-2-api.herokuapp.com/videos/${videoID}/comments/${commentID}?api_key=5b8e876e-df7c-4475-8dff-3cd2ed0b1aab`;
 
 let newId = "";
+let useId = "";
 
 export default class Home extends Component {
   state = {
@@ -38,15 +38,16 @@ export default class Home extends Component {
   };
 
   //******** WORKING API AND MOUNTING START ******** */
-
   //******** Loads When Page is Refreshed ******** */
   componentDidMount() {
     this.getData();
   }
 
   //******** Loads When State Changes ******** */
-  componentDidUpdate(prevProps, props) {
-    newId = this.props.match.params.videoID;
+  componentDidUpdate(prevProps, savedVideo) {
+    if (savedVideo !== newId) {
+      newId = this.props.match.params.videoID;
+    }
     if (newId !== prevProps.match.params.videoID) {
       if (this.props.match.path === "/") {
         this.getDefaultVideo();
@@ -83,9 +84,17 @@ export default class Home extends Component {
   deleteComment = async (e) => {
     e.preventDefault();
     let buttonID = this.selectComment(e);
-    await axios.delete(API_URL_ID_Comment_Delete(this.state.videoID, buttonID));
-    toast.success("Comment Deleted");
-    this.getNewComment();
+    // console.log(buttonID);
+    // console.log(this.state.videoID);
+    const removeComment = await axios.delete(
+      API_URL_ID_Comment_Delete(this.state.videoID, buttonID)
+    );
+    if (removeComment.status === 200) {
+      setTimeout(() => {
+        this.getNewComment();
+      }, 2000);
+      toast.success("Comment Deleted");
+    }
   };
 
   //******** API Call To Post A Comment ******** */
@@ -98,19 +107,16 @@ export default class Home extends Component {
       comment: event,
     };
 
-    const response = await axios.post(
-      API_URL_ID_COMMENTS(this.state.videoID),
-      newComment
-    );
-    console.log(response);
-
-    // .post(API_URL_ID_COMMENTS(this.state.videoID), newComment)
-    //   .then((response) => {
-    //     console.log(response);
-    //     if (response.status === 200) {
-    //       this.getNewComment();
-    //     }
-    //   });
+    await axios
+      .post(API_URL_ID_COMMENTS(this.state.videoID), newComment)
+      .then((response) => {
+        console.log(response);
+        if (response.status === 200) {
+          setTimeout(() => {
+            this.getNewComment();
+          }, 2000);
+        }
+      });
   };
 
   //******** API Call To Only Respond With New Comment ******** */
@@ -121,21 +127,21 @@ export default class Home extends Component {
     this.setState({
       details: response.data,
     });
-    console.log(this.state.details);
   };
 
   //******** API Call When The Page Is Refreshed ******** */
   //This function is called when componentDidMount
   getData = async () => {
     const videoResponse = await axios.get(API_URL);
-    // console.log(videoResponse);
-    const detailsResponse = await axios.get(
-      API_URL_ID(videoResponse.data[0].id)
-    );
+    useId = this.props.match.params.videoID;
+    if (useId === undefined) {
+      useId = videoResponse.data[0].id;
+    }
+    const detailsResponse = await axios.get(API_URL_ID(useId));
     this.setState({
       videos: videoResponse.data,
       details: detailsResponse.data,
-      videoID: videoResponse.data[0].id,
+      videoID: useId,
     });
   };
 
