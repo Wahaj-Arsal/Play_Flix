@@ -4,6 +4,7 @@ import VideoPlayer from "../../components/videoPlayer/VideoPlayer";
 import VideoDetail from "../../components/videoDetail/VideoDetail";
 import AsideVideo from "../../components/sideVideos/SideVideo";
 import CommentsRender from "../../components/commentsRender/CommentsRender";
+
 import { Component } from "react";
 import axios from "axios";
 import moment from "moment";
@@ -14,8 +15,9 @@ import { uniqueNamesGenerator, starWars } from "unique-names-generator";
 // const API_URL = `https://project-2-api.herokuapp.com/videos/`;
 // const API_KEY = `?api_key=5b8e876e-df7c-4475-8dff-3cd2ed0b1aab`;
 
-const API_URL = `http://localhost:8080/`;
+const API_URL = process.env.REACT_APP_BACKEND_URL;
 const API_URL_ID = (id) => `http://localhost:8080/videos/${id}`;
+const API_URL_ID_LIKES = (id) => `http://localhost:8080/videos/${id}/likes`;
 const API_URL_ID_COMMENTS = (id) =>
   `http://localhost:8080/videos/${id}/comments`;
 const API_URL_ID_Comment_Delete = (videoID, commentID) =>
@@ -119,11 +121,24 @@ export default class Home extends Component {
       });
   };
 
+  //******** API Call To Increment Like on Video ******** */
+  //Posts A Comment To The Video
+  incrementLike = async () => {
+    await axios.put(API_URL_ID_LIKES(this.state.videoID)).then((response) => {
+      // console.log(response);
+      if (response.status === 200) {
+        setTimeout(() => {
+          this.getNewComment();
+        }, 2000);
+      }
+    });
+  };
+
   //******** API Call To Only Respond With New Comment ******** */
   //This function re-renders the comments section, including the new comment
   getNewComment = async () => {
     const response = await axios.get(API_URL_ID(this.state.videoID));
-    console.log(response.data);
+    // console.log(response.data);
     this.setState({
       details: response.data,
     });
@@ -155,6 +170,7 @@ export default class Home extends Component {
       videos: videoResponse.data.filter((video) => video.id !== newId),
       videoID: newId,
     });
+    window.scrollTo(500, 0);
   };
 
   //******** WORKING API AND MOUNTING END ******** */
@@ -170,9 +186,11 @@ export default class Home extends Component {
   render() {
     const { details } = this.state;
     const { videos } = this.state;
+    console.log(details);
+    console.log(videos);
     return (
       <>
-        {!videos && !details ? (
+        {!videos.length > 0 && !details.omments > 0 ? (
           <p>Loading...</p>
         ) : (
           <>
@@ -187,6 +205,7 @@ export default class Home extends Component {
                   detailsLikes={details.likes}
                   detailsDescription={details.description}
                   newMoment={this.newMoment}
+                  incrementLike={this.incrementLike}
                 />
                 <CommentInput
                   postComment={this.postComment}

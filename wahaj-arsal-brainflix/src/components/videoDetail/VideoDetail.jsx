@@ -13,6 +13,7 @@ const VideoDetail = ({
   detailsLikes,
   detailsDescription,
   newMoment,
+  incrementLike,
 }) => {
   // console.log(details);
   return (
@@ -29,7 +30,12 @@ const VideoDetail = ({
             <p className="video__label">{detailsViews}</p>
           </div>
           <div className="video__likes">
-            <img src={likes} alt="like icon" className="video__img" />
+            <img
+              src={likes}
+              alt="like icon"
+              className="video__img"
+              onClick={incrementLike}
+            />
             <p className="video__label">{detailsLikes}</p>
           </div>
         </div>
