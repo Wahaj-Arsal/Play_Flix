@@ -1,5 +1,7 @@
 /** @format */
 
+// require("dotenv").config();
+
 import "../src/App.scss";
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";

@@ -8,7 +8,8 @@ import React, { Component } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-const API_URL_UPLOAD = `http://localhost:8080/upload`;
+const API_URL = process.env.REACT_APP_BACKEND_URL;
+const API_URL_UPLOAD = `${API_URL}/upload`;
 
 export default class Upload extends Component {
   constructor(props) {
