@@ -12,22 +12,12 @@ import CommentInput from "../../components/commentsInput/CommentInput";
 import { toast } from "react-toastify";
 import { uniqueNamesGenerator, starWars } from "unique-names-generator";
 
-// const API_URL = `https://project-2-api.herokuapp.com/videos/`;
-// const API_KEY = `?api_key=5b8e876e-df7c-4475-8dff-3cd2ed0b1aab`;
-
 const API_URL = process.env.REACT_APP_BACKEND_URL;
-const API_URL_ID = (id) => `http://localhost:8080/videos/${id}`;
-const API_URL_ID_LIKES = (id) => `http://localhost:8080/videos/${id}/likes`;
-const API_URL_ID_COMMENTS = (id) =>
-  `http://localhost:8080/videos/${id}/comments`;
+const API_URL_ID = (id) => `${API_URL}/videos/${id}`;
+const API_URL_ID_LIKES = (id) => `${API_URL}/videos/${id}/likes`;
+const API_URL_ID_COMMENTS = (id) => `${API_URL}/videos/${id}/comments`;
 const API_URL_ID_Comment_Delete = (videoID, commentID) =>
-  `http://localhost:8080/videos/${videoID}/comments/${commentID}`;
-
-// const API_URL_ID_Comment = (id) =>
-//   `https://project-2-api.herokuapp.com/videos/${id}/comments?api_key=5b8e876e-df7c-4475-8dff-3cd2ed0b1aab`;
-
-// const API_URL_ID_Comment_Delete = (videoID, commentID) =>
-//   `https://project-2-api.herokuapp.com/videos/${videoID}/comments/${commentID}?api_key=5b8e876e-df7c-4475-8dff-3cd2ed0b1aab`;
+  `${API_URL}/videos/${videoID}/comments/${commentID}`;
 
 let newId = "";
 let useId = "";
@@ -86,15 +76,13 @@ export default class Home extends Component {
   deleteComment = async (e) => {
     e.preventDefault();
     let buttonID = this.selectComment(e);
-    // console.log(buttonID);
-    // console.log(this.state.videoID);
     const removeComment = await axios.delete(
       API_URL_ID_Comment_Delete(this.state.videoID, buttonID)
     );
     if (removeComment.status === 200) {
       setTimeout(() => {
         this.getNewComment();
-      }, 2000);
+      }, 500);
       toast.success("Comment Deleted");
     }
   };
@@ -112,11 +100,10 @@ export default class Home extends Component {
     await axios
       .post(API_URL_ID_COMMENTS(this.state.videoID), newComment)
       .then((response) => {
-        console.log(response);
         if (response.status === 200) {
           setTimeout(() => {
             this.getNewComment();
-          }, 2000);
+          }, 500);
         }
       });
   };
@@ -125,11 +112,10 @@ export default class Home extends Component {
   //Posts A Comment To The Video
   incrementLike = async () => {
     await axios.put(API_URL_ID_LIKES(this.state.videoID)).then((response) => {
-      // console.log(response);
       if (response.status === 200) {
         setTimeout(() => {
           this.getNewComment();
-        }, 2000);
+        }, 500);
       }
     });
   };
@@ -138,7 +124,6 @@ export default class Home extends Component {
   //This function re-renders the comments section, including the new comment
   getNewComment = async () => {
     const response = await axios.get(API_URL_ID(this.state.videoID));
-    // console.log(response.data);
     this.setState({
       details: response.data,
     });
@@ -184,10 +169,7 @@ export default class Home extends Component {
   };
 
   render() {
-    const { details } = this.state;
-    const { videos } = this.state;
-    console.log(details);
-    console.log(videos);
+    const { details, videos } = this.state;
     return (
       <>
         {!videos.length > 0 && !details.omments > 0 ? (
