@@ -10,7 +10,7 @@ export default function CommentsRender({
 }) {
   detailsComment &&
     detailsComment.sort((first, last) => last.timestamp - first.timestamp);
-
+  console.log(detailsComment);
   const commentMarkup =
     detailsComment &&
     detailsComment.map((comment) => {
