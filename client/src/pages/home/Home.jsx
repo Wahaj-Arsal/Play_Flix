@@ -132,7 +132,7 @@ export default class Home extends Component {
   //******** API Call When The Page Is Refreshed ******** */
   //This function is called when componentDidMount
   getData = async () => {
-    const videoResponse = await axios.get("http://localhost:8080");
+    const videoResponse = await axios.get(API_URL);
     useId = this.props.match.params.videoID;
     if (useId === undefined) {
       useId = videoResponse.data[0].id;
