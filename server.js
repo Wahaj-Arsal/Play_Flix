@@ -43,7 +43,7 @@ app.post("/upload", (req, res) => {
     views: "404",
     likes: "200",
     duration: "4:04",
-    video: "Such good, much like.",
+    video: "Custom Video.",
     timestamp: new Date(),
     comments: [
       {
