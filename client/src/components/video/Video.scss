@@ -1,0 +1,89 @@
+/** @format */
+
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials//breakpoints" as *;
+
+.aside {
+  max-width: 1020px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  @include tablet {
+    padding: 0 2.25rem;
+  }
+  @include desktop {
+    padding: 0 0 0 1.5rem;
+  }
+
+  &__title {
+    @include m-sub-header;
+    padding: 1rem 0;
+    color: $fnt-clr-primary-light;
+    text-transform: uppercase;
+    @include tablet {
+      @include d-t-sub-header;
+    }
+    @include desktop {
+      padding: 1.5rem 0 1rem 0;
+    }
+  }
+
+  &__tile {
+    @include flex(row, flex-start, null);
+    padding: 0 0 1rem 0;
+    @include tablet {
+      width: 50%;
+    }
+    @include desktop {
+      width: 100%;
+    }
+  }
+  &__background {
+    background-color: $clr-secondary-light;
+    background-position: center;
+    background-size: cover;
+    min-width: 8.125rem; //130px
+    max-width: 8.125rem; //130px
+    height: 4.375rem; //70px
+    border-radius: 0.25rem; //4px
+  }
+  &__link {
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.25rem; //4px
+    cursor: pointer;
+  }
+}
+
+.aside-details {
+  @include flex(column, space-between, null);
+  text-decoration: none;
+  padding: 0 0 0 1rem;
+  width: 12.5rem; //200px
+  @include tablet {
+    @include flex(column, space-between, null);
+  }
+
+  &__title {
+    @include m-sub-header;
+    padding-bottom: 0.15rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    @include tablet {
+      @include d-t-sub-header;
+    }
+  }
+
+  &__channel {
+    @include m-body-copy;
+    @include tablet {
+      @include d-t-body-copy;
+    }
+  }
+}

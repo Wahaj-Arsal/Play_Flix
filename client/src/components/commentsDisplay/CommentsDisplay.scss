@@ -1,0 +1,109 @@
+/** @format */
+
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials//breakpoints" as *;
+
+.comment {
+  @include m-body-copy;
+  padding: 0 1rem;
+  margin: 0 auto;
+  max-width: 1020px;
+  @include tablet {
+    @include d-t-body-copy;
+    padding: 0 2.25rem;
+  }
+  @include desktop {
+    padding: 0;
+  }
+
+  &__container {
+    border-bottom: 2px solid $clr-secondary-light;
+    &:nth-child(1) {
+      border-top: 2px solid $clr-secondary-light;
+    }
+    @include desktop {
+      border-bottom: 2px solid $clr-secondary-light;
+      &:nth-child(1) {
+        border-top: 2px solid $clr-secondary-light;
+      }
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+  &__tile {
+    @include flex(row, flex-start, left);
+    width: 100%;
+    padding: 0.5rem 0 1rem 0;
+    @include tablet {
+      padding: 1rem 0;
+    }
+    @include desktop {
+      padding: 1rem 1.5rem 1rem 0;
+    }
+  }
+
+  &__picture {
+    width: 20%;
+    background-color: $clr-secondary-light;
+    background-position: -4px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    max-width: 2.25rem; //36px
+    max-height: 2.25rem; //36px
+    border-radius: 50%;
+    margin-top: 0.625rem;
+    @include tablet {
+      max-width: 2.5rem;
+      max-height: 2.5rem;
+      margin-top: 0.625rem; //10px
+    }
+  }
+
+  &__content {
+    padding: 0 1rem;
+    width: 100%;
+    @include tablet {
+      padding: 0 0 0 1rem;
+    }
+  }
+
+  &__header {
+    @include flex(row, space-between, center);
+    padding: 0.5rem 0;
+  }
+
+  &__name {
+    @include m-sub-header;
+    font-size: 0.75rem;
+    @include tablet {
+      @include d-t-sub-header;
+    }
+  }
+
+  &__date {
+    @include m-body-copy;
+    color: $fnt-clr-primary-light;
+    @include tablet {
+      @include d-t-body-copy;
+    }
+  }
+
+  &__text {
+    @include m-body-copy;
+    width: 100%;
+    @include tablet {
+      @include d-t-body-copy;
+    }
+  }
+  &__icons {
+    padding: 0.5rem 0 0 0;
+    text-align: right;
+  }
+  &__button {
+    outline: none;
+    border: none;
+    background-color: $fnt-clr-primary-neutral;
+  }
+}
