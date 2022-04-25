@@ -21,7 +21,7 @@ const VideoDetail = ({
       <h1 className="video__title">{detailsTitle}</h1>
       <div className="video__details">
         <div className="video__content">
-          <p className="video__channel">By {detailsChannel}</p>
+          <p className="video__channel">By: {detailsChannel}</p>
           <p className="video__date">{newMoment(detailsTimeStamp)}</p>
         </div>
         <div className="video__stats">

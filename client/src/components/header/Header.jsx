@@ -1,7 +1,7 @@
 /** @format */
 
 import "./Header.scss";
-import logo from "../../assets/Logo/BrainFlix-logo.svg";
+import logo from "../../assets/Logo/logo.svg";
 import Button from "../button/Button";
 import { Link } from "react-router-dom";
 
